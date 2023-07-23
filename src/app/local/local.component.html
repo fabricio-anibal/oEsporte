@@ -1,0 +1,97 @@
+<div class="div-body">
+    <div class="div-left">
+        <mat-selection-list class="list" #locais hideSingleSelectionIndicator (selectionChange)="localChoosen(localSelecionado)" [multiple]="false" [(ngModel)]="localSelecionado">
+            <mat-list-option class="list-option" *ngFor="let local of locaisEsporte" [value]="local">
+                <div class="div-icon-option">
+                    <mat-icon class="icon-list"> pin_drop</mat-icon>
+                </div>
+                <div class="div-text-option">
+                    
+                    <span class="title-list">
+                        <mat-icon class="icon-title-list"> {{local.icon}}t</mat-icon>
+                        {{local.nome}}
+                        <mat-icon class="icon-title-list"> {{local.icon}}</mat-icon>
+                    </span> <br>
+                    
+                    <span class="sub-title-list">{{local.nomeFantasia}}</span> <br>
+
+                    <div class="div-information-list">
+                        <span class="information-lable-list">Endereço: </span>
+                        <span class="information-text-list">{{local.endereco.logradouro}}, {{local.endereco.numero}} - {{local.endereco.bairro}}, {{local.endereco.cidade}} - {{local.endereco.uf}}, {{local.endereco.cep}}</span>
+                    </div>
+
+                    <div class="div-information-list">
+                        <span class="information-lable-list">Atividades: </span>
+                        <span class="information-text-list" *ngFor="let atividade of local.atividades">{{atividade.nome}}<span *ngIf="!lastOfList(local.atividades, atividade)">,</span><span *ngIf="lastOfList(local.atividades, atividade)">.</span>
+                        </span>
+                    </div>
+                </div>
+            </mat-list-option>
+          </mat-selection-list>
+    </div>
+    <div class="div-right" *ngIf="locais.selectedOptions.hasValue()">
+        <div class="box-title">
+            <span class="text-title">
+                <mat-icon class="icon-title-box"> {{localSelecionado[0].icon}}t</mat-icon>
+                {{localSelecionado[0].nome}}
+                <mat-icon class="icon-title-box"> {{localSelecionado[0].icon}}</mat-icon>
+            </span>
+        </div>
+        <div class="description">
+            <p class="text-description">
+                {{localSelecionado[0].descricao}}
+            </p>
+        </div>
+        <div class="content-infos">
+            <div class="content-infos-left">
+                <div class="div-information-content">
+                    <span class="information-lable-content">Endereço: </span>
+                    <span class="information-text-content">{{localSelecionado[0].endereco.logradouro}}, {{localSelecionado[0].endereco.numero}} - {{localSelecionado[0].endereco.bairro}}, {{localSelecionado[0].endereco.cidade}} - {{localSelecionado[0].endereco.uf}}, {{localSelecionado[0].endereco.cep}}</span>
+                </div>
+                <div class="div-information-content">
+                    <span class="information-lable-content">Telefones: </span>
+                    <span class="information-text-content" *ngFor="let telefone of localSelecionado[0].telefones">+{{telefone.ddi}}{{telefone.ddd}}{{telefone.numero}} ({{telefone.descricao}})<span *ngIf="!lastOfList(localSelecionado[0].telefones, telefone)">,</span><span *ngIf="lastOfList(localSelecionado[0].telefones, telefone)">.</span>
+                    </span>
+                </div>
+                <div class="div-information-content">
+                    <span class="information-lable-content">Horário de funcionamento: </span>
+                    <span class="information-text-content" *ngFor="let horario of localSelecionado[0].horarioDeFuncionamento">{{horario.dia}}: ({{horario.inicio}} à {{horario.fim}})<span *ngIf="!lastOfList(localSelecionado[0].horarioDeFuncionamento, horario)">;</span><span *ngIf="lastOfList(localSelecionado[0].horarioDeFuncionamento, horario)">.</span></span>
+                </div>
+            </div>
+            <div class="content-infos-right">
+                <div class="div-information-content">
+                    <span class="information-lable-content">Atividades: </span>
+                    <button mat-mini-fab class="clean-button" (click)="clearSelection(atividades)">
+                        <mat-icon>cleaning_services</mat-icon>
+                    </button>
+                    <mat-selection-list #atividades hideSingleSelectionIndicator [multiple]="false" class="list-information" [(ngModel)]="atividadeSelecionada" (selectionChange)="atividadeChoosen(atividadeSelecionada)">
+                        <mat-list-option *ngFor="let atividade of localSelecionado[0].atividades" [value]="atividade">
+                            <span class="option-list-information">{{atividade.nome}}</span>
+                        </mat-list-option>
+                    </mat-selection-list>
+                </div>
+                <div class="div-information-content">
+                    <span class="information-lable-content">Descrição: </span>
+                    <span class="information-text-content" *ngIf="atividades.selectedOptions.hasValue()">{{atividadeSelecionada[0].descricao}}</span>
+                </div>
+                <div class="div-information-content">
+                    <span class="information-lable-content">Preço: </span>
+                    <span class="information-text-content" *ngIf="atividades.selectedOptions.hasValue()">
+                        <span *ngIf="atividadeSelecionada[0].preco">{{atividadeSelecionada[0].moeda}} {{atividadeSelecionada[0].preco | number:'1.2-2'}}</span>
+                        <span *ngIf="!atividadeSelecionada[0].preco || atividadeSelecionada[0].preco == 0">Gratuito</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="content-images">
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile
+                    *ngFor="let image of imagensAtuais"
+                    [colspan]="image.cols"
+                    [rowspan]="image.rows">
+                    <img src="{{image.content}}" class="image">
+                </mat-grid-tile>
+              </mat-grid-list>
+        </div>
+    </div>
+</div>

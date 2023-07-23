@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class AppComponent {
-  title = 'oEsporte';
+export class HomeComponent {
 
   constructor(private router: Router) { }
 
@@ -17,9 +16,5 @@ export class AppComponent {
 
   redirectToEventos(){
     this.router.navigate(['eventos'])
-  }
-
-  redirectToHome(){
-    this.router.navigate(['home'])
   }
 }

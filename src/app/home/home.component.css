@@ -1,0 +1,37 @@
+.div-body{
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    margin: auto;
+    height: 30vh;
+}
+
+.center-button{
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 30vh;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px lightgray;
+    color: rgba(0,112,98,255) !important;
+    text-align: center;
+    
+}
+
+.icon-center-button{
+    font-size: 100px !important; 
+    width: auto !important; 
+    height: auto !important;
+}
+
+.text-button{
+    width: auto;
+    font-size: 3vh;
+    font-weight: bolder;
+}
+
+.div-text-button{
+    margin-top: 2vh;
+}
