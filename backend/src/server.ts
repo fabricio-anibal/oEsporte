@@ -1,14 +1,17 @@
 import e from 'express'
 import cors from 'cors'
-import {Database} from './repository/mongoDbConnection'
+import {Database} from './repository/mongoDb/mongoDbConnection'
 import {LocalService} from './service/localService'
+import {AuthService} from './service/authService'
+import { config } from '../conf/config'
 
 const app = e()
 
 const api = e.Router()
 
 const database = new Database()
-const service = new LocalService(database)
+const localService = new LocalService(database)
+const authService = new AuthService(database)
 
 app.use(cors())
 
@@ -20,17 +23,83 @@ api.get('/teste', async (req, res) => {
     })
 })
 
-api.post('/', e.json(), async (req, res) => {
-    await service.add(req.body)
-    res.status(200).json({
-        items: await service.list(),
+api.post('/local', validToken, e.json(), async (req, res) => {
+    //console.log(req.body)
+    await localService.add(req.body)
+    res.status(201).json({
+        status: 'ok'
     })
 })
 
-api.get('/', async (req, res) => {
-    await service.add(req.body)
+api.get('/local', async (req, res) => {
+    let locais = await localService.list()
     res.status(200).json({
+        status: 'ok',
+        items: locais,
+    })
+})
+
+api.post('/auth/register', e.json(), async (req, res) => {
+
+    if(await authService.verifyUsernameExistence(req.body.username)) {
+        res.status(400).json({
+            status: 'failure',
+            message: 'Username already exists',
+        })
+        return
+    }
+
+    if(!req.body.email){
+        res.status(400).json({
+            status: 'failure',
+            message: 'Email is required',
+        })
+        return
+    }
+
+    if(req.body.password != req.body.confirmPassword){
+        res.status(400).json({
+            status: 'failure',
+            message: 'Password and Confirm Password must be the same',
+        })
+        return
+    }
+
+    if(await authService.verifyEmailExistence(req.body.email)) {
+        res.status(400).json({
+            status: 'failure',
+            message: 'Email already exists',
+        })
+        return
+    }
+
+    await authService.save(req.body)
+    res.status(201).json({
         status: 'ok'
+    })
+})
+
+api.post('/auth/login', e.json(), async (req, res) => {
+
+    if(!await authService.verifyUsernameExistence(req.body.username)) {
+        res.status(404).json({
+            status: 'failure',
+            message: 'Username does not exist',
+        })
+        return
+    }
+
+    if(!await authService.validPassword(req.body)) {
+        res.status(400).json({
+            status: 'failure',
+            message: 'Invalid password',
+        })
+        return
+    }
+
+    res.status(200).json({
+        status: 'ok',
+        token: await authService.generateToken(req.body)
     })
 })
 
@@ -60,3 +129,35 @@ app.listen(port, () => {
         console.log(`ToDo! server Listening on port ${port}`)
     })
 })
+
+async function validToken(req: any, res: any, next: any) {
+    const tokenHeader = req.headers['authorization']
+    const token = tokenHeader && tokenHeader.split(' ')[1]
+
+    if (!token) {
+        res.status(401).json({
+            status: 'failure',
+            message: 'Access denied. No token provided.',
+        })
+        return
+    }
+
+    try {
+        if(await authService.validToken(token)){
+            next()
+        }
+        else {
+            res.status(400).json({
+                status: 'failure',
+                message: 'Invalid token.',
+            })
+        }
+    }
+    catch (ex) {
+        res.status(400).json({
+            status: 'failure',
+            message: 'Invalid token.',
+        })
+    }
+
+}

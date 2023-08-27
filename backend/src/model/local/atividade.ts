@@ -1,13 +1,13 @@
 import {Imagem} from './imagem'
 
 export class Atividade {
-    nome: String
-    descricao: String
+    nome: string
+    descricao: string
     preco: Number
-    moeda: String
+    moeda: string
     imagens: Imagem[]
 
-    constructor(nome: String, descricao: String, preco: Number, moeda: String, imagens: Imagem[]) {
+    constructor(nome: string, descricao: string, preco: Number, moeda: string, imagens: Imagem[]) {
         this.nome = nome
         this.descricao = descricao
         this.preco = preco

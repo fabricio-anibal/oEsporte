@@ -13,13 +13,24 @@ import { RouterModule } from '@angular/router';
 import {MatListModule} from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { LoginComponent } from './login/login.component';
+import { CreateLocalComponent } from './local/create-local/create-local.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     EventoComponent,
-    LocalComponent
+    LocalComponent,
+    LoginComponent,
+    CreateLocalComponent
   ],
   imports: [
     BrowserModule,
@@ -30,10 +41,19 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatListModule,
     FormsModule,
     MatGridListModule,
+    MatTabsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    HttpClientModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot([
       //{path: 'eventos', component: EventoComponent},
       {path: 'locais', component: LocalComponent},
       {path: 'home', component: HomeComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'createLocal', component: CreateLocalComponent},
       {path: '', redirectTo: '/home', pathMatch: 'prefix'}
     ])
   ],

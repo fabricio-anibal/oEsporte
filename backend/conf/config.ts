@@ -3,14 +3,17 @@ import { secrets } from "./secrets";
 export const config = {
     db: {
         url: secrets.url,
-        name: "todo-api",
-        testName: "todo-api-test",
+        name: "oEsporte",
         collections: {
-            localItems: "todo-items",
-            sequences: "sequences"
+            localItems: "local-items",
+            sequences: "sequences",
+            userItems: "users"
         }, 
         sequences: {
-            toDoItemId: 'todo-item-id'
+            localItemId: 'local-item-id'
         }
+    },
+    auth: {
+        secret: secrets.secret
     }
 }

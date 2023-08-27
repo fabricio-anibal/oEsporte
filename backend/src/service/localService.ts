@@ -1,7 +1,7 @@
-import { Local } from "../model/local";
-import { Database } from "../repository/mongoDbConnection";
-import { MongoDbException } from "../repository/mongoDbException";
-import { LocalRepository } from "../repository/mongoDbRepository";
+import { Local } from "../model/local/local";
+import { Database } from "../repository/mongoDb/mongoDbConnection";
+import { MongoDbException } from "../repository/mongoDb/mongoDbException";
+import { LocalRepository } from "../repository/mongoDbLocalRepository";
 
 export class LocalService{
     repository: LocalRepository

@@ -1,9 +1,9 @@
 export class Imagem {
-    content: String
+    content: string
     cols: Number
     rows: Number
 
-    constructor(content: String, cols: Number, rows: Number) {
+    constructor(content: string, cols: Number, rows: Number) {
         this.content = content
         this.cols = cols
         this.rows = rows

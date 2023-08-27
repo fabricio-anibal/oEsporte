@@ -1,9 +1,9 @@
 export class HorarioFuncionamento {
-    dia: String
-    inicio: String
-    fim: String
+    dia: string
+    inicio: string
+    fim: string
 
-    constructor(diaSemana: String, horaInicio: String, horaFim: String) {
+    constructor(diaSemana: string, horaInicio: string, horaFim: string) {
         this.dia = diaSemana
         this.inicio = horaInicio
         this.fim = horaFim

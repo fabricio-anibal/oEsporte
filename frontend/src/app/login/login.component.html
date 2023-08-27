@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="content">
+        <div class="div-title">
+            <h1 class="title">
+                Bem vindo
+            </h1>
+        </div>
+        <mat-tab-group dynamicHeight mat-align-tabs="center">
+            <mat-tab label="Login"> 
+                <div class="login-form">
+                    <div class="form-login">
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Usuário" type="text" required [(ngModel)]="usernameLogin">
+                                <mat-icon matSuffix>person</mat-icon>
+                                <mat-hint class="hint" align="end">{{usernameLoginHintMessage}}</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Senha" [type]="hide_login ? 'password' : 'text'" required [(ngModel)]="passwordLogin">
+                                <button mat-icon-button matSuffix (click)="hide_login = !hide_login" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide_login">
+                                    <mat-icon>{{hide_login ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>
+                                  <mat-hint class="hint" align="end">{{passwordLoginHintMessage}}</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <button mat-raised-button (click)="validLoginFields()" class="button">
+                            <span *ngIf="!loginLoading">Entrar</span>
+                            <mat-spinner *ngIf="loginLoading" diameter="30"></mat-spinner>
+                        </button>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Criar conta">
+                <div class="signup-form">
+                    <div class="form-signup">
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Usuário" type="text" required [(ngModel)]="usernameSignup">
+                                <mat-icon matSuffix>person</mat-icon>
+                                <mat-hint class="hint" align="end">{{usernameSignupHintMessage}}</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Email" type="email" required [(ngModel)]="emailSignup">
+                                <mat-icon matSuffix>email</mat-icon>
+                                <mat-hint class="hint" align="end">{{emailSignupHintMessage}}</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Senha" [type]="hide_signup ? 'password' : 'text'" required [(ngModel)]="passwordSignup">
+                                <button mat-icon-button matSuffix (click)="hide_signup = !hide_signup" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide_signup">
+                                    <mat-icon>{{hide_signup ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>
+                                    <mat-hint class="hint" align="end">{{passwordSignupHintMessage}}</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Confirmar senha" [type]="hide_signup ? 'password' : 'text'" required [(ngModel)]="confirmPasswordSignup">
+                                <mat-hint class="hint" align="end">{{confirmPasswordSignupHintMessage}}</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <button mat-raised-button class="button" (click)="validSignupFields()">
+                            <span *ngIf="!signupLoading">Criar conta</span>
+                            <mat-spinner *ngIf="signupLoading" diameter="30"></mat-spinner>
+                        </button>
+                    </div>
+                </div>
+            </mat-tab>
+          </mat-tab-group>
+    </div>
+</div>

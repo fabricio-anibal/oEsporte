@@ -1,0 +1,80 @@
+.container{
+    height: 90vh;
+    width: 100%;
+    position: absolute;
+    margin: auto;
+}
+
+.content{
+    display: inline;
+    float: left;
+    width: 60%;
+    height: 90%;
+    max-height: 90%;
+    overflow-y: initial;
+    overflow-x: hidden;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background-color: white;
+    /*opacity: 0.8;*/
+    border-radius: 30px;
+    box-shadow: 5px 5px 5px lightgray;
+    overflow: hidden;
+}
+
+.title{
+    padding: 10px;
+    text-align: center;
+    color: rgba(0,112,98,255);
+    position: relative;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+mat-tab-group{
+    height: 100%;
+}
+
+mat-tab{
+    height: 100%;
+}
+
+.login-form{
+    height: 50vh;
+    overflow: auto;
+}
+
+.form-login{
+    width: 40%;
+    margin: 0 auto;
+    position: relative;
+    top: 25%;
+    text-align: center;
+}
+
+.button{
+    margin: auto;
+    background-color: rgba(0,112,98,255) !important;
+    color: white !important;
+}
+
+.signup-form {
+    height: 60vh;
+    overflow: auto;
+}
+
+.form-signup{
+    width: 40%;
+    margin: 0 auto;
+    position: relative;
+    top: 10%;
+    text-align: center;
+}
+
+.hint{
+    color: red
+}

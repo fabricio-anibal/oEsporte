@@ -1,15 +1,21 @@
 <div class="container">
   <div>
     <mat-toolbar class="bar">
-      <h1 class="title">oEsporte</h1>
-      <button (click)="redirectToHome()" mat-mini-fab class="tab-button">
+      <h1 (click)="redirectToHome()" class="title">oEsporte</h1>
+      <button (click)="redirectToHome()" matTooltip="Home" mat-mini-fab class="tab-button">
         <mat-icon>home</mat-icon>
       </button>
       <button (click)="redirectToEventos()" style="background-color: lightgray !important; color: gray !important;" disabled mat-mini-fab class="tab-button">
         <mat-icon>event</mat-icon>
       </button>
-      <button (click)="redirectToLocais()" mat-mini-fab class="tab-button">
+      <button (click)="redirectToLocais()" matTooltip="Locais" mat-mini-fab class="tab-button">
         <mat-icon> place</mat-icon>
+      </button>
+      <button (click)="redirectToLogin()" matTooltip="Entrar" *ngIf="!getLocalStorage().getItem('token')" mat-mini-fab class="tab-button">
+        <mat-icon> login</mat-icon>
+      </button>
+      <button (click)="logout()" matTooltip="Sair" *ngIf="getLocalStorage().getItem('token')" mat-mini-fab class="tab-button">
+        <mat-icon> logout</mat-icon>
       </button>
     </mat-toolbar>
   </div>

@@ -1,5 +1,5 @@
 import {Db, MongoClient} from 'mongodb';
-import {config} from '../../conf/config';
+import {config} from '../../../conf/config';
 
 /**
  * Database connection class.
