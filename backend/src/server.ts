@@ -4,6 +4,7 @@ import {Database} from './repository/mongoDb/mongoDbConnection'
 import {LocalService} from './service/localService'
 import {AuthService} from './service/authService'
 import { config } from '../conf/config'
+import bodyParser from 'body-parser'
 
 const app = e()
 
@@ -13,15 +14,12 @@ const database = new Database()
 const localService = new LocalService(database)
 const authService = new AuthService(database)
 
+app.use(bodyParser.urlencoded({extended:true, parameterLimit: 100000, limit: '500mb'}))
+app.use(bodyParser.json({limit: '500mb'}))
+
 app.use(cors())
 
 app.use('/api', api)
-
-api.get('/teste', async (req, res) => {
-    res.status(200).json({
-        status: 'ok'
-    })
-})
 
 api.post('/local', validToken, e.json(), async (req, res) => {
     //console.log(req.body)
@@ -127,6 +125,7 @@ async function exitHandler() {
 app.listen(port, () => {
     database.connect().then(() => {
         console.log(`ToDo! server Listening on port ${port}`)
+        console.log()
     })
 })
 
@@ -161,3 +160,4 @@ async function validToken(req: any, res: any, next: any) {
     }
 
 }
+

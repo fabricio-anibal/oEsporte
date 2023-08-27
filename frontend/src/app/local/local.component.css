@@ -218,3 +218,9 @@ mat-list-option[aria-selected="true"] {
     background-color: rgba(0,112,98,255);
     box-shadow: 0 0 0 black;
 }
+
+mat-spinner{
+    margin: auto;
+    transform: translateY(-50%); 
+    top: 50%
+}

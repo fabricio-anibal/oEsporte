@@ -1,6 +1,7 @@
 <div class="div-body">
     <div class="div-left">
-        <mat-selection-list class="list" #locais hideSingleSelectionIndicator (selectionChange)="localChoosen(localSelecionado)" [multiple]="false" [(ngModel)]="localSelecionado">
+        <mat-spinner *ngIf="loading" diameter="100"></mat-spinner>
+        <mat-selection-list *ngIf="!loading" class="list" #locais hideSingleSelectionIndicator (selectionChange)="localChoosen(localSelecionado)" [multiple]="false" [(ngModel)]="localSelecionado">
             <mat-list-option class="list-option" *ngFor="let local of locaisEsporte" [value]="local">
                 <div class="div-icon-option">
                     <mat-icon class="icon-list"> pin_drop</mat-icon>
@@ -29,7 +30,7 @@
             </mat-list-option>
           </mat-selection-list>
     </div>
-    <div class="div-right" *ngIf="locais.selectedOptions.hasValue()">
+    <div class="div-right" *ngIf="localSelecionado.length > 0">
         <div class="box-title">
             <span class="text-title">
                 <mat-icon class="icon-title-box"> {{localSelecionado[0].icon}}t</mat-icon>
@@ -55,7 +56,7 @@
                 </div>
                 <div class="div-information-content">
                     <span class="information-lable-content">Horário de funcionamento: </span>
-                    <span class="information-text-content" *ngFor="let horario of localSelecionado[0].horarioDeFuncionamento">{{horario.dia}}: ({{horario.inicio}} à {{horario.fim}})<span *ngIf="!lastOfList(localSelecionado[0].horarioDeFuncionamento, horario)">;</span><span *ngIf="lastOfList(localSelecionado[0].horarioDeFuncionamento, horario)">.</span></span>
+                    <span class="information-text-content" *ngFor="let horario of localSelecionado[0].horarioFuncionamento">{{horario.dia}}: ({{horario.inicio}} à {{horario.fim}})<span *ngIf="!lastOfList(localSelecionado[0].horarioFuncionamento, horario)">;</span><span *ngIf="lastOfList(localSelecionado[0].horarioFuncionamento, horario)">.</span></span>
                 </div>
             </div>
             <div class="content-infos-right">
