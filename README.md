@@ -5,7 +5,7 @@ Backend
     - Liberação do IP para conexão com o banco de dados. Ou criação de cluster MongoDB com os seguintes requisitos:
 
         - Database: oEsporte
-        - Collections: local-item, sequences, users
+        - Collections: local-items, sequences, users
 
     - Criação do arquivo secret na pasta "conf" com as secrets para conexão no banco de dados e secret para geração e validação de token JWT (um secret alternativo foi submetido via moodle).
 
