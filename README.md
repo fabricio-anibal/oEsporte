@@ -15,6 +15,10 @@ Necessário ter o nodejs e npm instalados. Basta executar os seguintes comandos.
 
     - npm install: Download de dependencias
 
+    - npm install ts-node: Caso o comando acima ainda não tenha adicionado a dependencia.
+
+    - npm install nodemon: Caso o comando acima ainda não tenha adicionado a dependencia.
+
     - npm run watch: Executar o servidor
 
 
